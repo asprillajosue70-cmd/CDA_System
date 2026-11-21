@@ -2,7 +2,6 @@ package repositories;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import models.Comparendo;
-import models.Vehiculo;
 
 public class ComparendoRepository {
     private ArrayList<Comparendo> comparendos = new ArrayList<>();
@@ -45,17 +44,20 @@ public class ComparendoRepository {
         return compPaid;
     }
 
-    public ArrayList<Comparendo> findByVehicle(Vehiculo vehiculo) {
+    
+    public ArrayList<Comparendo> findByVehicleLicensePlate(String licensePlate) {
         ArrayList<Comparendo> compVehicle = new ArrayList<>();
 
         for (Comparendo comparendo : comparendos) {
-            if (comparendo.getVehicle().getId() == vehiculo.getId()) {
+            if (comparendo.getVehicleLicensePlate()
+                    .equalsIgnoreCase(licensePlate.trim())) {
                 compVehicle.add(comparendo);
             }
         }
 
         return compVehicle;
     }
+
 
     public ArrayList<Comparendo> findAll(){
         return comparendos;

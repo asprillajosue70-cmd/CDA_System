@@ -43,6 +43,12 @@ public class AppDependencies {
             propietarioRepository,
             comparendoRepository
         );
+
+        citaService = new CitaService(
+            citaRepository,
+            vehiculoRepository,
+            comparendoRepository
+        );
     }
 }
 

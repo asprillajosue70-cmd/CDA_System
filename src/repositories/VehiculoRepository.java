@@ -29,6 +29,12 @@ public class VehiculoRepository {
         return null;
     }
 
+
+    public boolean existsByLicensePlate(String licensePlate) {
+        return findByLicensePlate(licensePlate) != null;
+    }
+
+
     public ArrayList<Vehiculo> findAll() {
         return vehiculos;
     }
