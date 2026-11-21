@@ -22,7 +22,7 @@ public class UsuarioService {
             return ServiceResponse.error("[UNAUTHORIZED] Contraseña incorrecta.");
         }
 
-        return ServiceResponse.success("\"Inicio de sesión exitoso.\nBienvenido, " + usuario.getUsername() + "!");
+        return ServiceResponse.success("Inicio de sesión exitoso.\nBienvenido, " + usuario.getName() + "!");
     }
 }
 

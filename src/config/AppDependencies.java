@@ -5,6 +5,7 @@ import repositories.PropietarioRepository;
 import repositories.VehiculoRepository;
 import repositories.ComparendoRepository;
 import repositories.CitaRepository;
+import models.Usuario;
 
 import services.UsuarioService;
 import services.PropietarioService;
@@ -38,6 +39,16 @@ public class AppDependencies {
         citaRepository = new CitaRepository();
 
         // Inicialización de servicios
+         usuarioService = new UsuarioService(usuarioRepository);
+
+        propietarioService = new PropietarioService(
+            propietarioRepository
+        );
+
+        comparendoService = new ComparendoService(
+            comparendoRepository
+        );
+        
         vehiculoService = new VehiculoService(
             vehiculoRepository,
             propietarioRepository,
@@ -48,6 +59,11 @@ public class AppDependencies {
             citaRepository,
             vehiculoRepository,
             comparendoRepository
+        );
+
+        // Registro de usuario inicial
+        usuarioRepository.add(
+            new Usuario(1, "Administrador", "admin", "12345")
         );
     }
 }
