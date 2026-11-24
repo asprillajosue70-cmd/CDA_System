@@ -1,6 +1,7 @@
 package services;
 
 import repositories.UsuarioRepository;
+import services.LoginResponse;
 import models.Usuario;
 
 public class UsuarioService {
@@ -11,18 +12,27 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public ServiceResponse login(String username, String password) {
+    public LoginResponse login(String username, String password) {
+
         Usuario usuario = usuarioRepository.findByUsername(username);
 
         if (usuario == null) {
-            return ServiceResponse.error("[NOT FOUND] Usuario no encontrado.");
+            return LoginResponse.error(
+                "[NOT FOUND] Usuario no encontrado."
+            );
         }
 
         if (!usuario.getPassword().equals(password)) {
-            return ServiceResponse.error("[UNAUTHORIZED] Contraseña incorrecta.");
+            return LoginResponse.error(
+                "[UNAUTHORIZED] Contraseña incorrecta."
+            );
         }
 
-        return ServiceResponse.success("Inicio de sesión exitoso.\nBienvenido, " + usuario.getName() + "!");
+        return LoginResponse.success(
+            "Inicio de sesión exitoso.",
+            usuario
+        );
     }
+
 }
 

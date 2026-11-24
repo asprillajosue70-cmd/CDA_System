@@ -2,7 +2,7 @@ package views;
 
 import javax.swing.*;
 
-import services.ServiceResponse;
+import services.LoginResponse;
 import config.AppDependencies;
 
 import java.awt.*;
@@ -159,17 +159,21 @@ public class LoginView extends JFrame {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
-            ServiceResponse response =
+            LoginResponse response =
                 dependencies.usuarioService.login(username, password);
 
             if (response.isSuccess()) {
-                JOptionPane.showMessageDialog(
-                    this,
-                    response.getMessage(),
-                    "Éxito",
-                    JOptionPane.INFORMATION_MESSAGE
-                );
+
+                // Abrir el panel principal y enviar el usuario autenticado
+                HomeView homeView = new HomeView(response.getUsuario(), dependencies);
+
+                homeView.setVisible(true);
+
+                // Cerrar la ventana de inicio de sesión
+                dispose();
+
             } else {
+
                 JOptionPane.showMessageDialog(
                     this,
                     response.getMessage(),
@@ -178,6 +182,7 @@ public class LoginView extends JFrame {
                 );
             }
         });
+
 
 
         // Agregar componentes

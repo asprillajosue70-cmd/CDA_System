@@ -2,6 +2,7 @@ package services;
 
 import repositories.PropietarioRepository;
 import models.Propietario;
+import java.util.List;
 
 public class PropietarioService {
 
@@ -32,4 +33,7 @@ public class PropietarioService {
         return propietarioRepository.findById(id);
     }
 
+    public List<Propietario> findAllOwners() {
+        return propietarioRepository.findAll();
+    }
 }
